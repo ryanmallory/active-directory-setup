@@ -5,11 +5,6 @@
 <h1>On-premises Active Directory Deployment in VMWare Workstation</h1>
 This project outlines the implementation of on-premises Active Directory on a virtual machine running Windows Server 2022. Once this virtual machine is promoted to a domain controller, I join a Windows 10 client to the domain, and create 1,000 user accounts using a PowerShell script.<br />
 
-
-<h2>Video Demonstration</h2>
-
-- ### [YouTube: How to Deploy on-premises Active Directory within Azure Compute](https://www.youtube.com)
-
 <h2>Technologies Used</h2>
 
 - VMWare Workstation (Virtual Machines)
