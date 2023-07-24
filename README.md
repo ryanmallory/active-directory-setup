@@ -24,7 +24,7 @@ This project outlines the implementation of on-premises Active Directory on a vi
 -   Install Active Directory Domain Services on DC-1 and promote it to a domain controller
 -  Create an admin account and organizational units (OU) in Active Directory Users and Computers (ADUC), then login to DC-1 with the new admin account
 -  Set Client-1's default DNS server to DC-1's private IP address, then join Client-1 to DC-1's domain
--  Create 1,000 users accounts using a PowerShell script (run PowerShell ISE as administrator)
+-  Create 1,000 user accounts using a PowerShell script (run PowerShell ISE as administrator)
 -  Sign in to Client-1 using one of the new user accounts
 
 <h2>Deployment and Configuration Steps</h2>
