@@ -30,25 +30,92 @@ This project outlines the implementation of on-premises Active Directory on a vi
 <h2>Deployment and Configuration Steps</h2>
 
 <p>
-<img src="https://i.imgur.com/qdAuEyv.jpg" height="70%" width="70%"/>
+<img src="https://i.imgur.com/nphDZTr.jpg" height="70%" width="70%"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/A5MKfqD.jpg" height="70%" width="70%"/>
 </p>
 <p>
-I began by creating a virtual machine running Windows Server 2022 in VMWare Workstation. This machine will serve as the Active Directory domain controller in this lab. I'll be referring to this VM as "DC-1".
+I began by creating 2 virtual machines in VMWare Workstation. This first machine (named "DC-1") will be running Windows Server 2022, and it will serve as the domain controller running Active Directory. The other machine (named "Client-1") will be running Windows 10, and I'll be joining it to the domain created on DC-1 later on in the lab.
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/o59PNzr.jpg" height="70%" width="70%"/>
+<img src="https://i.imgur.com/Zo1R5Rm.jpg" height="70%" width="70%"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/OZGRWbU.jpg" height="70%" width="70%"/>
 </p>
 <p>
-Next, I created a virtual machine running Windows 10 Pro. This VM will be used to join the Active Directory domain created on DC-1. I will refer to this VM as "Client-1".
+As you can see in the diagram, I have to assign DC-1 a static IP address in order to allow Client-1 to join the domain. This is because domain controllers also act as DNS servers for their clients. When a domain is created, it's assigned a unique domain name (I'll be naming DC-1's domain "mydomain.com"). If Client-1's DNS server has no record of mydomain.com, there's no way to join the domain. A computer can't join a domain if it doesn't know that domain exists! (I know this is confusing, but it should become more clear as we go through the lab).
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/OJVO0mj.jpg" height="70%" width="70%"/>
+<img src="https://i.imgur.com/D5J8tPm.jpg" height="70%" width="70%"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/Xdil2Tt.jpg" height="70%" width="70%"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/V8oEJTx.jpg" height="70%" width="70%"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+With DC-1 and Client-1 both on, I opened Client-1's command prompt and continuously pinged DC-1's private IP address to test connectivity. The requests were timing out, so I opened Windows Defender Firewall in DC-1 and enabled inbound Core Networking Diagnostics (ICMPv4 protocol). This allowed DC-1 to receive ICMP traffic, and as a result the ping succeeded, confirming connectivity between the two machines.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/BGxgzEG.jpg" height="70%" width="70%"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/UUjsOec.jpg" height="70%" width="70%"/>
+</p>
+<p>
+In DC-1, I installed Active Directory Domain Services (AD DS) from the Server Manager Dashboard. Once AD DS was installed, I promoted DC-1 to a domain controller, allowing it to manage accounts and devices on the domain. I named the new domain "mydomain.com" for the sake of simplicity.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/k5vtn0r.jpg" height="70%" width="70%"/>
+</p>
+<p>
+With Active Directory Domain Services installed, I opened Active Directory Users and Computers (ADUC) and created two organizational units (OUs) and a user account. I named the OUs "_ADMINS" and "_EMPLOYEES", and the new user was “Ryan Mallory”. Ryan was going to be an administrator, so I created the account inside the _ADMINS OU and made him a member of the Domain Admins group, giving the account administrative privilege. I logged out of the default account and logged back in as Ryan.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/e4V47ms.jpg" height="70%" width="70%"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/lGFZIa6.jpg" height="70%" width="70%"/>
+</p>
+<p>
+Now that DC-1 was promoted to a domain controller, it now had the option to act as a DNS server. This would allow Client-1 to set DC-1's private IP address as its default DNS server, allowing Client-1 to join the domain. It's necessary for DC-1 to act as Client-1's DNS server because DC-1 is the only DNS server that has an existing record of mydomain.com. 
+<br />
+
+<p>
+<img src="https://i.imgur.com/x5DMCsZ.jpg" height="70%" width="70%"/>
+</p>
+<p>
+The last step in setting up the domain was creating more users, and I accomplished this generating 1,000 randomly-named user accounts using a PowerShell script. All of the accounts were placed into the _EMPLOYEES OU.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/hwZQCM0.jpg" height="70%" width="70%"/>
+</p>
+
+<p>
+<img src="https://i.imgur.com/JGasb0S.jpg" height="70%" width="70%"/>
+</p>
+<p>
+In order to test if the newly-created user accounts were functional, I picked a random "employee" from the _EMPLOYEES OU and used that account to login to Client-1. The login was successful, and I used the hostname and whoami commands to confirm the account identity.
 </p>
 <br />
