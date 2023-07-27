@@ -20,11 +20,11 @@ This lab outlines the implementation of on-premises Active Directory on a virtua
 
 - Create 2 virtual machines, one running Windows Server 2022 (named "DC-1", a.k.a the domain controller), and the other running Windows 10 Pro (named "Client-1")
 -   Assign DC-1 a static IP address
--   Open Client-1's command prompt and perpetually ping (ping -t) DC-1's private IP address. Open Windows Defender Firewall on DC-1 and enable ICMPv4 Echo Request. Go back to Client-1's command prompt and observe the change
+-   Open Client-1's command prompt and continuously ping DC-1's private IP address. Open Windows Defender Firewall on DC-1 and enable ICMPv4 Echo Request. Go back to Client-1's command prompt and observe the change
 -   Install Active Directory Domain Services on DC-1 and promote it to a domain controller
--  Create an admin account and organizational units (OUs) in Active Directory Users and Computers (ADUC), then login to DC-1 with the new admin account
+-  Create an admin account and organizational units (OUs) in Active Directory Users and Computers (ADUC), then log in to DC-1 using the new admin account
 -  Set Client-1's default DNS server to DC-1's private IP address, then join Client-1 to DC-1's domain
--  Create 1,000 user accounts using a PowerShell script (run PowerShell ISE as administrator)
+-  Create 1,000 user accounts using a PowerShell script
 -  Sign in to Client-1 using one of the newly-created user accounts
 
 <h2>Deployment and Configuration Steps</h2>
