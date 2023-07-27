@@ -2,7 +2,7 @@
 <img src="https://i.imgur.com/pU5A58S.png" alt="Microsoft Active Directory Logo"/>
 </p>
 
-<h1>On-premises Active Directory Deployment in VMWare Workstation</h1>
+<h1>Installing and Configuring Active Directory</h1>
 This lab outlines the implementation of on-premises Active Directory on a virtual machine running Windows Server 2022. Once Active Directory is installed and the virtual machine is promoted to a domain controller, I join a Windows 10 client to the domain, and create 1,000 user accounts using a PowerShell script.<br />
 
 <h2>Technologies Used</h2>
